@@ -1,4 +1,5 @@
 import { ITask } from '../entities/task';
+import { AlreadyExistException } from '../errors/already-exist.exception';
 import { ITaksRepository } from '../interfaces/repositories/task.repository';
 import {
   ICreateTaskParams,
@@ -11,7 +12,7 @@ export class CreateTaskUseCase implements ICreateTaskUseCase {
     const isExistTitle = await this.taskRepository.findByTitle(params.title);
 
     if (isExistTitle) {
-      throw new Error('already exist title');
+      throw new AlreadyExistException('title');
     }
 
     const task = await this.taskRepository.add({
