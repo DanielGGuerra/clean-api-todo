@@ -1,4 +1,6 @@
 import { ICreateTaskUseCase } from '../../domain/interfaces/use-cases/create-task.use-case';
+import { created } from './helpers/created.helpers';
+import { handleErrorHelper } from './helpers/handle-error.helper';
 import { IController } from './interfaces/controller';
 import { IRequest } from './interfaces/request';
 import { IResponse } from './interfaces/response';
@@ -16,15 +18,9 @@ export class CreateTaskController implements IController {
         description: body.description,
       });
 
-      return {
-        statusCode: 201,
-        data: task,
-      };
+      return created(task);
     } catch (err) {
-      return {
-        statusCode: 500,
-        data: (err as Error).message,
-      };
+      return handleErrorHelper(err as Error);
     }
   }
 }
