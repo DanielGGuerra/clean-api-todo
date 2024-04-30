@@ -40,4 +40,27 @@ export class TaskRepository implements ITaksRepository {
 
     return Promise.resolve(task);
   }
+
+  find(filter: Partial<ITask>): Promise<ITask[]> {
+    const columnsFilter = Object.keys(filter);
+
+    if (!columnsFilter.length) return Promise.resolve(this.taskList);
+
+    const tasks = [];
+
+    for (const task of this.taskList) {
+      let insert = true;
+      for (const column of columnsFilter) {
+        if (
+          filter[column as keyof ITask] &&
+          task[column as keyof ITask] !== filter[column as keyof ITask]
+        ) {
+          insert = false;
+        }
+      }
+      if (insert) tasks.push(task);
+    }
+
+    return Promise.resolve(tasks);
+  }
 }

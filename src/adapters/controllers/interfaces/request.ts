@@ -1,6 +1,6 @@
-export type IRequest = {
+export interface IRequest {
   headers?: Record<string, string>[];
   params?: Record<string, string>;
-  query?: Record<string, string>;
+  query?: any;
   body?: any;
-};
+}
