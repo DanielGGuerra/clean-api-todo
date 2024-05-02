@@ -63,4 +63,14 @@ export class TaskRepository implements ITaksRepository {
 
     return Promise.resolve(tasks);
   }
+
+  update(id: number, params: Partial<Omit<ITask, 'id'>>): Promise<void> {
+    const index = this.taskList.findIndex(task => task.id === id);
+
+    if (index >= 0) {
+      this.taskList[index] = Object.assign({}, this.taskList[index], params);
+    }
+
+    return Promise.resolve();
+  }
 }
