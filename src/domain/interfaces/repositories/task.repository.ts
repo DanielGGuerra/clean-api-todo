@@ -6,4 +6,5 @@ export interface ITaksRepository {
   findById(id: number): Promise<ITask | null>;
   findByTitle(title: string): Promise<ITask | null>;
   update(id: number, params: Partial<Omit<ITask, 'id'>>): Promise<void>;
+  delete(id: number): Promise<void>;
 }

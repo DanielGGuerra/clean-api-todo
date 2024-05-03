@@ -2,7 +2,7 @@ import { ITask } from '../../domain/entities/task';
 import { ITaksRepository } from '../../domain/interfaces/repositories/task.repository';
 
 export class TaskRepository implements ITaksRepository {
-  private readonly taskList: ITask[] = [];
+  private taskList: ITask[] = [];
   private lastId = 0;
 
   add(data: ITask): Promise<ITask> {
@@ -71,6 +71,12 @@ export class TaskRepository implements ITaksRepository {
       this.taskList[index] = Object.assign({}, this.taskList[index], params);
     }
 
+    return Promise.resolve();
+  }
+
+  delete(id: number): Promise<void> {
+    const tasks = this.taskList.filter(task => task.id !== id);
+    this.taskList = tasks;
     return Promise.resolve();
   }
 }

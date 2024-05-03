@@ -1,10 +1,10 @@
 import { ITask } from '../../entities/task';
 
-export type ICreateTaskParams = {
+export interface ICreateTaskParams {
   title: string;
   description: string;
-};
+}
 
-export type ICreateTaskUseCase = {
+export interface ICreateTaskUseCase {
   execute(params: ICreateTaskParams): Promise<ITask>;
-};
+}
